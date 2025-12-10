@@ -9,13 +9,15 @@ class Box {
   float OGyV2 = yV2;
   color activeColor = color(105);
   color inactiveColor = color(175);
-  boolean hDBool = false;
-  Box(float xV1, float xV2, float yV1, float yV2) {
+  String Text;
+  Box(float xV1, float xV2, float yV1, float yV2, String Text) {
+    this.Text = Text;
     this.xV1 = xV1;
     this.xV2 = xV2;
     this.yV1 = yV1;
     this.yV2 = yV2;
   }
+
   void drawBox() {
     rect(xV1, yV1, xV2, yV2);
     fill(0);
@@ -35,9 +37,21 @@ class Box {
     if (hoverDetect()==true) {
       fill(activeColor);
       drawBox();
-    } else if(hoverDetect()==false){
+    } else if (hoverDetect()==false) {
       fill(inactiveColor);
-     drawBox();
+      drawBox();
     }
   }
+  void boxSound() {
+    if (hoverDetect()==true&&mousePressed==true&&flip==false) {
+      sound.play();
+    }
+  }
+  void drawText() {
+    float c = textWidth(Text);
+    float boxLength = xV1-xV2;
+    textFont(MinecraftSeven);
+    text(Text, xV2+boxLength/2, yV1+(yV1-yV2)+textSize);
+  }
+
 }
