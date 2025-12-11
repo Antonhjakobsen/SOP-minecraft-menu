@@ -80,15 +80,16 @@ void setup() {
   textFont(MinecraftSeven);
   sound = new SoundFile(this, "klik.wav");
   fullScreen();
-  drawStartBoxes();
+  makeStartBoxes();
+  Language.iconScalerSet();
+  Accessibility.iconScalerSet();
+  makeStartBoxes();
   pixelDensity(1);
   panCounter = 0;
   iconMin=boxHeight*0.799;
   iconMax=boxHeight*0.801;
   backgroundMusic();
   titleScalerSet();
-  Language.iconScalerSet();
-  Accessibility.iconScalerSet();
 }
 
 void draw() {
@@ -124,17 +125,17 @@ void mouseReleased() {
   flip=false;
 }
 
-void drawStartBoxes() {
+void makeStartBoxes() {
   Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer", Empty, 0, 0);
   Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer", Empty, 0, 0);
   MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms", Empty, 0, 0);
-  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options", Empty, 0, 0);
+  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options...", Empty, 0, 0);
   Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game", Empty, 0, 0);
   Language = new Box(width/4-boxHeight-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Klode, width/4-boxHeight-paddingButtons, height/4+paddingButtons*5+boxHeight*3);
   Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", AccessibilityIcon1, width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3);
-  Pin1 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*3+boxHeight*1, boxHeight, "", Pin,paddingButtons*width/576,height/4+paddingButtons*3+boxHeight);
-  Pin2 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*4+boxHeight*2, boxHeight, "", Pin,paddingButtons*width/576,height/4+paddingButtons*4+boxHeight*2);
-  Pin3 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Pin,paddingButtons*width/576,height/4+paddingButtons*5+boxHeight*3);
+  Pin1 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*3+boxHeight*1, boxHeight, "", Pin,paddingButtons*width/576-paddingButtons/2,height/4+paddingButtons*3+boxHeight);
+  Pin2 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*4+boxHeight*2, boxHeight, "", Pin,paddingButtons*width/576-paddingButtons/2,height/4+paddingButtons*4+boxHeight*2);
+  Pin3 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Pin,paddingButtons*width/576-paddingButtons/2,height/4+paddingButtons*5+boxHeight*3);
 }
 
 void startScreen() {
