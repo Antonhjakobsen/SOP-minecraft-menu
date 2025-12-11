@@ -6,6 +6,15 @@ PImage Panorama_2;
 float boxHeight;
 float textSize;
 SoundFile sound;
+SoundFile BG1;
+SoundFile BG2;
+SoundFile BG3;
+SoundFile BG4;
+SoundFile BG5;
+SoundFile BG6;
+SoundFile BG7;
+SoundFile BG8;
+SoundFile BG9;
 Box Singleplayer;
 Box Multiplayer;
 Box MinecraftRealms;
@@ -25,7 +34,17 @@ float paddingButtons;
 PImage Empty;
 PImage Klode;
 PImage AccessibilityIcon1;
+float randomMusik;
 void setup() {
+  BG1=new SoundFile(this, "Baggrundsmusik/1.mp3");
+  BG2=new SoundFile(this, "Baggrundsmusik/2.mp3");
+  BG3=new SoundFile(this, "Baggrundsmusik/3.mp3");
+  BG4=new SoundFile(this, "Baggrundsmusik/4.mp3");
+  BG5=new SoundFile(this, "Baggrundsmusik/5.mp3");
+  BG6=new SoundFile(this, "Baggrundsmusik/6.mp3");
+  BG7=new SoundFile(this, "Baggrundsmusik/7.mp3");
+  BG8=new SoundFile(this, "Baggrundsmusik/8.mp3");
+  BG9=new SoundFile(this, "Baggrundsmusik/9.mp3");
   AccessibilityIcon1=loadImage("Panorama/Accessibility.png");
   Klode=loadImage("Panorama/Klode.png");
   Empty=loadImage("Empty.png");
@@ -47,6 +66,7 @@ void setup() {
   drawStartBoxes();
   pixelDensity(1);
   panCounter = 0;
+  backgroundMusic();
 }
 
 void draw() {
@@ -90,16 +110,16 @@ void mouseReleased() {
 }
 
 void drawStartBoxes() {
-  Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer",Empty);
-  Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer",Empty);
-  MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms",Empty);
-  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options",Empty);
-  Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game",Empty);
-  Language = new Box(width/4-boxHeight-paddingButtons,boxHeight,height/4+paddingButtons*5+boxHeight*3,boxHeight,"",Klode);
-  Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons,boxHeight,height/4+paddingButtons*5+boxHeight*3,boxHeight,"",AccessibilityIcon1);
+  Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer", Empty);
+  Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer", Empty);
+  MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms", Empty);
+  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options", Empty);
+  Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game", Empty);
+  Language = new Box(width/4-boxHeight-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Klode);
+  Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", AccessibilityIcon1);
 }
 
-void startScreen(){
+void startScreen() {
   panCounter=panCounter-1;
   Panorama();
   Singleplayer.Engine();
@@ -112,12 +132,35 @@ void startScreen(){
   title();
 }
 
-void startBoxClick(){
-   Singleplayer.boxClick();
+void startBoxClick() {
+  Singleplayer.boxClick();
   Multiplayer.boxClick();
   MinecraftRealms.boxClick();
   Options.boxClick();
   Quit.boxClick();
   Language.boxClick();
-  Accessibility.boxClick(); 
+  Accessibility.boxClick();
+}
+
+void backgroundMusic() {
+  randomMusik=ceil(random(9));
+  if (randomMusik==1) {
+    BG1.play();
+  } else if (randomMusik==2) {
+    BG2.play();
+  } else if (randomMusik==3) {
+    BG3.play();
+  } else if (randomMusik==4) {
+    BG4.play();
+  } else if (randomMusik==5) {
+    BG5.play();
+  } else if (randomMusik==6) {
+    BG6.play();
+  } else if (randomMusik==7) {
+    BG7.play();
+  } else if (randomMusik==8) {
+    BG8.play();
+  } else {
+    BG9.play();
+  }
 }
