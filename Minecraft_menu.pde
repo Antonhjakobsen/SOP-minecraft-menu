@@ -29,13 +29,20 @@ PImage Title;
 float titleScaler;
 float titleMin;
 float titleMax;
-float scaleWidth;
+float scaleWidthTitle;
+float scaleWidthIcon;
+float iconMin;
+float iconMax;
 float paddingButtons;
 PImage Empty;
 PImage Klode;
 PImage AccessibilityIcon1;
 float randomMusik;
+
+
 void setup() {
+  titleScaler=1;
+  noSmooth();
   BG1=new SoundFile(this, "Baggrundsmusik/1.mp3");
   BG2=new SoundFile(this, "Baggrundsmusik/2.mp3");
   BG3=new SoundFile(this, "Baggrundsmusik/3.mp3");
@@ -45,16 +52,20 @@ void setup() {
   BG7=new SoundFile(this, "Baggrundsmusik/7.mp3");
   BG8=new SoundFile(this, "Baggrundsmusik/8.mp3");
   BG9=new SoundFile(this, "Baggrundsmusik/9.mp3");
+  
   AccessibilityIcon1=loadImage("Panorama/Accessibility.png");
   Klode=loadImage("Panorama/Klode.png");
   Empty=loadImage("Empty.png");
+  
   paddingButtons=width/64;
   titleMax=width*0.505;
   titleMin=width*0.495;
-  titleScaler=1;
+  
   Title=loadImage("Panorama/Minecraft-title.png");
+  
   strokeWeight=height/256;
   strokeWeight(strokeWeight);
+  
   boxHeight=height/10.24;
   textSize=height/19.69;
   Panorama_1 = loadImage("Panorama/Panorama_1.png");
@@ -66,13 +77,19 @@ void setup() {
   drawStartBoxes();
   pixelDensity(1);
   panCounter = 0;
+  iconMin=boxHeight*0.799;
+  iconMax=boxHeight*0.801;
   backgroundMusic();
+  titleScalerSet();
+  Language.iconScalerSet();
+  Accessibility.iconScalerSet();
 }
 
 void draw() {
   background(0);
   startScreen();
 }
+
 void Panorama() {
   for (i=i; i>panCounter-1; i=i-1) {
     image(Panorama_2, i+Panorama_1.width, 0);
@@ -86,14 +103,6 @@ void Panorama() {
 }
 
 void title() {
-  for (int n=0; n < 500; n++) {
-    scaleWidth = Title.width * titleScaler;
-    if (scaleWidth > titleMax) {
-      titleScaler=titleScaler*0.99;
-    } else if (scaleWidth < titleMin) {
-      titleScaler=titleScaler*1.01;
-    }
-  }
   pushMatrix();
   scale(titleScaler);
   image(Title, (width/4)/titleScaler, height/-10.24);
@@ -110,13 +119,13 @@ void mouseReleased() {
 }
 
 void drawStartBoxes() {
-  Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer", Empty);
-  Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer", Empty);
-  MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms", Empty);
-  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options", Empty);
-  Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game", Empty);
-  Language = new Box(width/4-boxHeight-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Klode);
-  Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", AccessibilityIcon1);
+  Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer", Empty,0,0);
+  Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer", Empty,0,0);
+  MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms", Empty,0,0);
+  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options", Empty,0,0);
+  Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game", Empty,0,0);
+  Language = new Box(width/4-boxHeight-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "",Klode, width/4-boxHeight-paddingButtons,height/4+paddingButtons*5+boxHeight*3);
+  Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", AccessibilityIcon1,width/2+paddingButtons*2+width-(width/4)*3-paddingButtons,height/4+paddingButtons*5+boxHeight*3);
 }
 
 void startScreen() {
@@ -162,5 +171,18 @@ void backgroundMusic() {
     BG8.play();
   } else {
     BG9.play();
+  }
+}
+
+void titleScalerSet() {
+  for (int n=0; n < 500; n++) {
+    scaleWidthTitle = Title.width * titleScaler;
+    if (scaleWidthTitle > titleMax) {
+      titleScaler=titleScaler*0.99;
+    } else if (scaleWidthTitle < titleMin) {
+      titleScaler=titleScaler*1.01;
+    } else {
+      break;
+    }
   }
 }
