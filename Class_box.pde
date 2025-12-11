@@ -58,7 +58,7 @@ class Box {
     text(Text, xV1+xV2/2-c/2, yV1+yV2/2+textSize/2);
   }
   void displayImage(){
-   image(this.Image,xV1,yV1);
+   image(this.Image,xV1+boxHeight*0.125,yV1+boxHeight*0.125);
   }
   void Engine(){
       this.hoverDetect();
