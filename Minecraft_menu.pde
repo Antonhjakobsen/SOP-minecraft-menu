@@ -42,9 +42,10 @@ PImage Klode;
 PImage AccessibilityIcon1;
 PImage Pin;
 float randomMusik;
-
+color yellowText;
 
 void setup() {
+  yellowText=color(255,255,0);
   titleScaler=1;
   noSmooth();
   BG1=new SoundFile(this, "Baggrundsmusik/1.mp3");
@@ -139,6 +140,7 @@ void drawStartBoxes() {
 void startScreen() {
   panCounter=panCounter-1;
   Panorama();
+  Singleplayer.Engine();//Denne er indsat for at fikse indstillingerne, som bliver ændre af yellowText(); ved ikke en anden måde udover dette hvorpå det kan fikses
   Singleplayer.Engine();
   Multiplayer.Engine();
   MinecraftRealms.Engine();
@@ -150,6 +152,7 @@ void startScreen() {
   Pin2.Engine();
   Pin3.Engine();
   title();
+  yellowText();
 }
 
 void startBoxClick() {
@@ -199,4 +202,16 @@ void titleScalerSet() {
       break;
     }
   }
+}
+
+void yellowText(){
+  pushMatrix();
+  textSize(height/60);
+  fill(yellowText);
+  rotate(radians(-10));
+  translate(0-width/32,height/5);
+  text("The yellow text is cool", width/1.5,height/6);
+  fill(255);
+  textSize=height/19.69;
+  popMatrix();
 }
