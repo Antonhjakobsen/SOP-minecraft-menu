@@ -132,9 +132,9 @@ void drawStartBoxes() {
   Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game", Empty, 0, 0);
   Language = new Box(width/4-boxHeight-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Klode, width/4-boxHeight-paddingButtons, height/4+paddingButtons*5+boxHeight*3);
   Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", AccessibilityIcon1, width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3);
-  Pin1 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*3+boxHeight*1, boxHeight, "", Pin,paddingButtons*3,height/4+paddingButtons*3+boxHeight);
-  Pin2 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*4+boxHeight*2, boxHeight, "", Pin,paddingButtons*3,height/4+paddingButtons*4+boxHeight*2);
-  Pin3 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Pin,paddingButtons*3,height/4+paddingButtons*5+boxHeight*3);
+  Pin1 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*3+boxHeight*1, boxHeight, "", Pin,paddingButtons*width/576,height/4+paddingButtons*3+boxHeight);
+  Pin2 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*4+boxHeight*2, boxHeight, "", Pin,paddingButtons*width/576,height/4+paddingButtons*4+boxHeight*2);
+  Pin3 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Pin,paddingButtons*width/576,height/4+paddingButtons*5+boxHeight*3);
 }
 
 void startScreen() {
@@ -153,6 +153,7 @@ void startScreen() {
   Pin3.Engine();
   title();
   yellowText();
+  musicPlay();
 }
 
 void startBoxClick() {
@@ -214,4 +215,10 @@ void yellowText(){
   fill(255);
   textSize=height/19.69;
   popMatrix();
+}
+
+void musicPlay(){
+ if(BG1.isPlaying()==false&&BG2.isPlaying()==false&&BG3.isPlaying()==false&&BG4.isPlaying()==false&&BG5.isPlaying()==false&&BG6.isPlaying()==false&&BG7.isPlaying()==false&&BG8.isPlaying()==false&&BG9.isPlaying()==false){
+   backgroundMusic();
+ }
 }
