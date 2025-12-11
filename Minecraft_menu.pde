@@ -22,6 +22,9 @@ Box Options;
 Box Quit;
 Box Language;
 Box Accessibility;
+Box Pin1;
+Box Pin2;
+Box Pin3;
 int panCounter;
 int i;
 float strokeWeight;
@@ -37,6 +40,7 @@ float paddingButtons;
 PImage Empty;
 PImage Klode;
 PImage AccessibilityIcon1;
+PImage Pin;
 float randomMusik;
 
 
@@ -52,20 +56,21 @@ void setup() {
   BG7=new SoundFile(this, "Baggrundsmusik/7.mp3");
   BG8=new SoundFile(this, "Baggrundsmusik/8.mp3");
   BG9=new SoundFile(this, "Baggrundsmusik/9.mp3");
-  
+
   AccessibilityIcon1=loadImage("Panorama/Accessibility.png");
   Klode=loadImage("Panorama/Klode.png");
   Empty=loadImage("Empty.png");
-  
+  Pin=loadImage("Panorama/Pin.png");
+
   paddingButtons=width/64;
   titleMax=width*0.505;
   titleMin=width*0.495;
-  
+
   Title=loadImage("Panorama/Minecraft-title.png");
-  
+
   strokeWeight=height/256;
   strokeWeight(strokeWeight);
-  
+
   boxHeight=height/10.24;
   textSize=height/19.69;
   Panorama_1 = loadImage("Panorama/Panorama_1.png");
@@ -119,13 +124,16 @@ void mouseReleased() {
 }
 
 void drawStartBoxes() {
-  Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer", Empty,0,0);
-  Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer", Empty,0,0);
-  MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms", Empty,0,0);
-  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options", Empty,0,0);
-  Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game", Empty,0,0);
-  Language = new Box(width/4-boxHeight-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "",Klode, width/4-boxHeight-paddingButtons,height/4+paddingButtons*5+boxHeight*3);
-  Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", AccessibilityIcon1,width/2+paddingButtons*2+width-(width/4)*3-paddingButtons,height/4+paddingButtons*5+boxHeight*3);
+  Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer", Empty, 0, 0);
+  Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer", Empty, 0, 0);
+  MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms", Empty, 0, 0);
+  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options", Empty, 0, 0);
+  Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game", Empty, 0, 0);
+  Language = new Box(width/4-boxHeight-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Klode, width/4-boxHeight-paddingButtons, height/4+paddingButtons*5+boxHeight*3);
+  Accessibility = new Box(width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", AccessibilityIcon1, width/2+paddingButtons*2+width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3);
+  Pin1 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*3+boxHeight*1, boxHeight, "", Pin,paddingButtons*3,height/4+paddingButtons*3+boxHeight);
+  Pin2 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*4+boxHeight*2, boxHeight, "", Pin,paddingButtons*3,height/4+paddingButtons*4+boxHeight*2);
+  Pin3 = new Box(paddingButtons*3, boxHeight, height/4+paddingButtons*5+boxHeight*3, boxHeight, "", Pin,paddingButtons*3,height/4+paddingButtons*5+boxHeight*3);
 }
 
 void startScreen() {
@@ -138,6 +146,9 @@ void startScreen() {
   Quit.Engine();
   Language.Engine();
   Accessibility.Engine();
+  Pin1.Engine();
+  Pin2.Engine();
+  Pin3.Engine();
   title();
 }
 
@@ -149,6 +160,9 @@ void startBoxClick() {
   Quit.boxClick();
   Language.boxClick();
   Accessibility.boxClick();
+  Pin1.boxClick();
+  Pin2.boxClick();
+  Pin3.boxClick();
 }
 
 void backgroundMusic() {

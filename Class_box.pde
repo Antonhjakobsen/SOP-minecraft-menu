@@ -79,9 +79,10 @@ class Box {
   void displayImage(){
     pushMatrix();
     scale(iconScaler);
-   image(this.Image,xV3/iconScaler+boxHeight/8,yV3+paddingButtons*0.25+iconScaler*100);
+   image(this.Image,xV3/iconScaler+boxHeight/8.5,yV3/iconScaler+boxHeight/8.5);
    popMatrix();
   }
+  
   void Engine(){
       this.hoverDetect();
       this.hoverDrawBox();
