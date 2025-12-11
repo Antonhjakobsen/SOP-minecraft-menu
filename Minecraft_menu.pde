@@ -3,17 +3,38 @@ PFont MinecraftSeven;
 boolean flip;
 PImage Panorama_1;
 PImage Panorama_2;
-PImage Panorama_3;
-PImage Panorama_4;
 float boxHeight;
-int textSize;
+float textSize;
 SoundFile sound;
 Box Singleplayer;
-int fa;
+Box Multiplayer;
+Box MinecraftRealms;
+Box Options;
+Box Quit;
+Box Language;
+int panCounter;
 int i;
+float strokeWeight;
+PImage Title;
+float titleScaler;
+float titleMin;
+float titleMax;
+float scaleWidth;
+float paddingButtons;
+PImage Empty;
+PImage Klode;
 void setup() {
-  boxHeight=100;
-  textSize=64;
+  Klode=loadImage("Panorama/Klode.png");
+  Empty=loadImage("Empty.png");
+  paddingButtons=width/64;
+  titleMax=width*0.505;
+  titleMin=width*0.495;
+  titleScaler=1;
+  Title=loadImage("Panorama/Minecraft-title.png");
+  strokeWeight=height/256;
+  strokeWeight(strokeWeight);
+  boxHeight=height/10.24;
+  textSize=height/19.69;
   Panorama_1 = loadImage("Panorama/Panorama_1.png");
   Panorama_2 = loadImage("Panorama/Panorama_2.png");
   MinecraftSeven = createFont("Minecraft Seven/Minecraft Seven_2.ttf", textSize);
@@ -21,35 +42,56 @@ void setup() {
   sound = new SoundFile(this, "klik.wav");
   fullScreen();
   drawStartBoxes();
-  Singleplayer.drawBox();
   pixelDensity(1);
-  fa = 0;
-  frameRate(120);
+  panCounter = 0;
 }
 
 void draw() {
   background(0);
-  fa=fa-1;
+  panCounter=panCounter-1;
   Panorama();
-  Singleplayer.hoverDetect();
-  Singleplayer.hoverDrawBox();
-  Singleplayer.drawText();
+  Singleplayer.Engine();
+  Multiplayer.Engine();
+  MinecraftRealms.Engine();
+  Options.Engine();
+  Quit.Engine();
+  Language.Engine();
+  title();
 }
-
 void Panorama() {
-  for (i=i; i>fa-1; i=i-1) {
+  for (i=i; i>panCounter-1; i=i-1) {
     image(Panorama_2, i+Panorama_1.width, 0);
     image(Panorama_1, i, 0);
     image(Panorama_1, i+Panorama_1.width+Panorama_2.width, 0);
   }
   if (i==-4096) {
     i=0;
-    fa=0;
+    panCounter=0;
   }
 }
 
+void title() {
+  for (int n=0; n < 500; n++) {
+    scaleWidth = Title.width * titleScaler;
+    if (scaleWidth > titleMax) {
+      titleScaler=titleScaler*0.99;
+    } else if (scaleWidth < titleMin) {
+      titleScaler=titleScaler*1.01;
+    }
+  }
+  pushMatrix();
+  scale(titleScaler);
+  image(Title, (width/4)/titleScaler, height/-10.24);
+  popMatrix();
+}
+
 void mousePressed() {
-  Singleplayer.boxSound();
+  Singleplayer.boxClick();
+  Multiplayer.boxClick();
+  MinecraftRealms.boxClick();
+  Options.boxClick();
+  Quit.boxClick();
+  Language.boxClick();
   flip=true;
 }
 
@@ -58,6 +100,10 @@ void mouseReleased() {
 }
 
 void drawStartBoxes() {
-  Singleplayer = new Box(width/6, width-(width/6)*2, height/3+boxHeight, height/3, "Singleplayer");
-  
+  Singleplayer = new Box(width/4, width-(width/4)*2, height/4, boxHeight, "Singleplayer",Empty);
+  Multiplayer = new Box(width/4, width-(width/4)*2, height/4+paddingButtons+boxHeight, boxHeight, "Multiplayer",Empty);
+  MinecraftRealms = new Box(width/4, width-(width/4)*2, height/4+paddingButtons*2+boxHeight*2, boxHeight, "Minecraft Realms",Empty);
+  Options = new Box(width/4, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Options",Empty);
+  Quit = new Box(width/2+paddingButtons, width-(width/4)*3-paddingButtons, height/4+paddingButtons*5+boxHeight*3, boxHeight, "Quit game",Empty);
+  Language = new Box(width/4-boxHeight-paddingButtons,boxHeight,height/4+paddingButtons*5+boxHeight*3,boxHeight,"",Klode);
 }
